@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'users',
     'products',
     'orders',
+    'admin_panel',
 ]
 
 MIDDLEWARE = [
@@ -121,10 +122,8 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
-# Custom user model
 AUTH_USER_MODEL = 'users.User'
 
-# REST Framework
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
