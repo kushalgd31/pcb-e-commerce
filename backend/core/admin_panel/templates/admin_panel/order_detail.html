@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Update Order</title>
+</head>
+<body>
+    <h1>Update Order {{ order.id }}</h1>
+    <p>Status: {{ order.status }}</p>
+    <form method="post">
+        {% csrf_token %}
+        <label>Status:</label>
+        <select name="status">
+            <option value="approved">Approved</option>
+            <option value="rejected">Rejected</option>
+        </select>
+        <button type="submit">Update</button>
+    </form>
+</body>
+</html>

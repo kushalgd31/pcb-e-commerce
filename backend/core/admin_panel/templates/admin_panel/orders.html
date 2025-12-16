@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Orders</title>
+</head>
+<body>
+    <h1>Orders</h1>
+    <ul>
+        {% for order in orders %}
+        <li>
+            Order {{ order.id }} - {{ order.status }} - ${{ order.total_amount }}
+            <a href="{% url 'admin_order_update' order.pk %}">Update Status</a>
+        </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
