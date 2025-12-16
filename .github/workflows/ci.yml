@@ -1,0 +1,61 @@
+name: PCB E-commerce CI
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  lint-backend:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+    - name: Install dependencies
+      run: |
+        cd backend/core
+        pip install -r requirements.txt
+    - name: Lint Django
+      run: |
+        cd backend/core
+        python manage.py check
+
+  lint-fastapi:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+    - name: Install dependencies
+      run: |
+        cd backend/fastapi-cart
+        pip install -r requirements.txt
+    - name: Lint FastAPI
+      run: |
+        cd backend/fastapi-cart
+        python -m py_compile main.py
+
+  build-frontend:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Node
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'
+    - name: Build Next.js
+      run: |
+        cd frontend/nextjs-shop
+        npm install
+        npm run build
+    - name: Build React
+      run: |
+        cd frontend/react-admin
+        npm install
+        npm run build
